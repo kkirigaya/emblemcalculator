@@ -1,0 +1,10 @@
+/*
+Styling for Emblem Farming Calculator
+Creator: Jarrod Pyper (https://pypelineweb.com);
+Github: https://github.com/Pypeline/emblemcalculator;
+*/
+
+label {
+	width: 100px;
+	display: inline-block;
+}
