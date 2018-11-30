@@ -28,10 +28,10 @@ jQuery(document).ready(function($){
 	  },1000);
 	}
 
-	initializeClock('countdown', '12 Nov 2018 05:59:00 GMT');
+	initializeClock('countdown', '12 Dec 2018 05:59:00 GMT');
 
 
-	var ending = getTimeRemaining('12 Nov 2018 05:59:00 GMT');
+	var ending = getTimeRemaining('12 Dec 2018 05:59:00 GMT');
 	var daysRemaining = ending['days'];
 	if( daysRemaining < 1 ) {
 		if( ending['hours'] < 1 ) {
@@ -71,16 +71,16 @@ jQuery(document).ready(function($){
 
 		if( remaingingBronzeNeededToday < 1 ) {
 			$('.bronzeNeededToday').html(0);
-			$('.perday .moreSentinelsBronze').html(0);
+			$('.perday .moreBossBronze').html(0);
 			$('.perday .moreHostedBeginnerRaidsBronze').html(0);
 			$('.perday .moreJoinedBeginnerRaidsBronze').html(0);
 		} else {
 			$('.bronzeNeededToday').html(remaingingBronzeNeededToday);
-			$('.perday .moreSentinelsBronze').html(Math.abs(Math.ceil(remaingingBronzeNeededToday/13)));
+			$('.perday .moreBossBronze').html(Math.abs(Math.ceil(remaingingBronzeNeededToday/13)));
 			$('.perday .moreHostedBeginnerRaidsBronze').html(Math.abs(Math.ceil(remaingingBronzeNeededToday/24)));
 			$('.perday .moreJoinedBeginnerRaidsBronze').html(Math.abs(Math.ceil(remaingingBronzeNeededToday/16)));
 		}
-		$('.totals .moreSentinelsBronze').html(Math.abs(Math.ceil((maxBronze-bronzeTotal-bronzeToday)/13)));
+		$('.totals .moreBossBronze').html(Math.abs(Math.ceil((maxBronze-bronzeTotal-bronzeToday)/13)));
 		$('.totals .moreHostedBeginnerRaidsBronze').html(Math.abs(Math.ceil((maxBronze-bronzeTotal-bronzeToday)/24)));
 		$('.totals .moreJoinedBeginnerRaidsBronze').html(Math.abs(Math.ceil((maxBronze-bronzeTotal-bronzeToday)/16)));
 
