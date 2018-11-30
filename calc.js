@@ -114,7 +114,7 @@ jQuery(document).ready(function($){
 		$('.totals .moreJoinedStandardRaidsSilver').html(Math.abs(Math.ceil((maxSilver-silverTotal-silverToday)/13)));
 
 		//gold numbers
-		var maxGold = 3000;
+		var maxGold = 4500;
 	 	var goldTotal = parseInt($('#goldTotal').val());
 	 	if( isNaN(goldTotal) )
 			goldTotal = 0;
