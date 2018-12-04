@@ -1,4 +1,9 @@
 jQuery(document).ready(function($){
+	//handle show/hide of instructions
+	$('#info').on('click', function(e){
+		$('.info-text').slideToggle();
+	})
+
 	function getTimeRemaining(endtime){
 	  var t = Date.parse(endtime) - Date.parse(new Date());
 	  var seconds = Math.floor( (t/1000) % 60 );
@@ -52,22 +57,29 @@ jQuery(document).ready(function($){
 		}
 	}
 
+	$('#copy-current').on('click', function() {
+		$('#bronzeCurrent').val($('#bronzeStarting').val());
+		$('#silverCurrent').val($('#silverStarting').val());
+		$('#goldCurrent').val($('#goldStarting').val());
+	});
+
 	$('#calculate').on('click', function(e) {
 	 	//bronze numbers
 	 	var maxBronze = 1000;
-	 	var bronzeTotal = parseInt($('#bronzeTotal').val());
-	 	if( isNaN(bronzeTotal) )
-			bronzeTotal = 0;
-		var bronzeToday = parseInt($('#bronzeToday').val());
-		if( isNaN(bronzeToday) )
-			bronzeToday = 0;
-		var bronzeNeeded = maxBronze - (bronzeTotal+bronzeToday);
-		var bronzeNeededToday = Math.ceil((maxBronze-bronzeTotal)/daysRemaining);
-		var remaingingBronzeNeededToday = bronzeNeededToday-bronzeToday;
-		if( maxBronze-bronzeTotal-bronzeToday < 1 )
+	 	var bronzeStarting = parseInt($('#bronzeStarting').val());
+	 	if( isNaN(bronzeStarting) )
+			bronzeStarting = 0;
+		var bronzeCurrent = parseInt($('#bronzeCurrent').val());
+		if( isNaN(bronzeCurrent) )
+			bronzeCurrent = 0;
+		var bronzeNeeded = maxBronze - bronzeCurrent;
+		var bronzeNeededToday = Math.ceil((maxBronze-bronzeStarting)/daysRemaining);
+		var remaingingBronzeNeededToday = bronzeNeededToday-(bronzeCurrent-bronzeStarting);
+
+		if( maxBronze-bronzeCurrent < 1 )
 			$('.bronzeNeededTotal').html('0');
 		else
-			$('.bronzeNeededTotal').html(maxBronze-bronzeTotal-bronzeToday);
+			$('.bronzeNeededTotal').html(maxBronze-bronzeCurrent);
 
 		if( remaingingBronzeNeededToday < 1 ) {
 			$('.bronzeNeededToday').html(0);
@@ -80,26 +92,26 @@ jQuery(document).ready(function($){
 			$('.perday .moreHostedBeginnerRaidsBronze').html(Math.abs(Math.ceil(remaingingBronzeNeededToday/24)));
 			$('.perday .moreJoinedBeginnerRaidsBronze').html(Math.abs(Math.ceil(remaingingBronzeNeededToday/16)));
 		}
-		$('.totals .moreBossBronze').html(Math.abs(Math.ceil((maxBronze-bronzeTotal-bronzeToday)/13)));
-		$('.totals .moreHostedBeginnerRaidsBronze').html(Math.abs(Math.ceil((maxBronze-bronzeTotal-bronzeToday)/24)));
-		$('.totals .moreJoinedBeginnerRaidsBronze').html(Math.abs(Math.ceil((maxBronze-bronzeTotal-bronzeToday)/16)));
+		$('.totals .moreBossBronze').html(Math.abs(Math.ceil((maxBronze-bronzeCurrent)/13)));
+		$('.totals .moreHostedBeginnerRaidsBronze').html(Math.abs(Math.ceil((maxBronze-bronzeCurrent)/24)));
+		$('.totals .moreJoinedBeginnerRaidsBronze').html(Math.abs(Math.ceil((maxBronze-bronzeCurrent)/16)));
 
 		//silver numbers
 		var maxSilver = 1000;
-	 	var silverTotal =  parseInt($('#silverTotal').val());
-	 	if( isNaN(silverTotal) )
-			silverTotal = 0;
-		var silverToday =  parseInt($('#silverToday').val());
-		if( isNaN(silverToday) )
-			silverToday = 0;
-		var silverNeeded = maxSilver - (silverTotal+silverToday);
-		var silverNeededToday = Math.ceil((maxSilver-silverTotal)/daysRemaining);
-		var remaingingSilverNeededToday = silverNeededToday-silverToday;
+	 	var silverStarting =  parseInt($('#silverStarting').val());
+	 	if( isNaN(silverStarting) )
+			silverStarting = 0;
+		var silverCurrent =  parseInt($('#silverCurrent').val());
+		if( isNaN(silverCurrent) )
+			silverCurrent = 0;
+		var silverNeeded = maxSilver - silverCurrent;
+		var silverNeededToday = Math.ceil((maxSilver-silverStarting)/daysRemaining);
+		var remaingingSilverNeededToday = silverNeededToday-(silverCurrent-silverStarting);
 
-		if( maxSilver-silverTotal-silverToday < 1 )
+		if( maxSilver-silverCurrent < 1 )
 			$('.silverNeededTotal').html('0');
 		else
-			$('.silverNeededTotal').html(maxSilver-silverTotal-silverToday);
+			$('.silverNeededTotal').html(maxSilver-silverCurrent);
 
 		if( remaingingSilverNeededToday < 1 ) {
 			$('.perday .silverNeededToday').html(0);
@@ -110,24 +122,25 @@ jQuery(document).ready(function($){
 			$('.perday .moreHostedStandardRaidsSilver').html(Math.abs(Math.ceil(remaingingSilverNeededToday/20)));
 			$('.perday .moreJoinedStandardRaidsSilver').html(Math.abs(Math.ceil(remaingingSilverNeededToday/13)));
 		}
-		$('.totals .moreHostedStandardRaidsSilver').html(Math.abs(Math.ceil((maxSilver-silverTotal-silverToday)/20)));
-		$('.totals .moreJoinedStandardRaidsSilver').html(Math.abs(Math.ceil((maxSilver-silverTotal-silverToday)/13)));
+		$('.totals .moreHostedStandardRaidsSilver').html(Math.abs(Math.ceil((maxSilver-silverCurrent)/20)));
+		$('.totals .moreJoinedStandardRaidsSilver').html(Math.abs(Math.ceil((maxSilver-silverCurrent)/13)));
 
 		//gold numbers
 		var maxGold = 4500;
-	 	var goldTotal = parseInt($('#goldTotal').val());
-	 	if( isNaN(goldTotal) )
-			goldTotal = 0;
-		var goldToday =  parseInt($('#goldToday').val());
-		if( isNaN(goldToday) )
-			goldToday = 0;
-		var goldNeeded = maxGold - (goldTotal+goldToday);
-		var goldNeededToday = Math.ceil((maxGold-goldTotal)/daysRemaining);
-		var remaingingGoldNeededToday = goldNeededToday-goldToday;
-		if( maxGold-goldTotal-goldToday < 1 )
+	 	var goldStarting = parseInt($('#goldStarting').val());
+	 	if( isNaN(goldStarting) )
+			goldStarting = 0;
+		var goldCurrent =  parseInt($('#goldCurrent').val());
+		if( isNaN(goldCurrent) )
+			goldCurrent = 0;
+		var goldNeeded = maxGold - goldCurrent;
+		var goldNeededToday = Math.ceil((maxGold-goldStarting)/daysRemaining);
+		var remaingingGoldNeededToday = goldNeededToday-(goldCurrent-goldStarting);
+
+		if( maxGold-goldCurrent < 1 )
 			$('.goldNeededTotal').html('0');
 		else
-			$('.goldNeededTotal').html(maxGold-goldTotal-goldToday);
+			$('.goldNeededTotal').html(maxGold-goldCurrent);
 
 		if( remaingingGoldNeededToday < 1 ) {
 			$('.perday .goldNeededToday').html(0);
@@ -140,9 +153,9 @@ jQuery(document).ready(function($){
 			$('.perday .moreJoinedExpertRaidsGold').html(Math.abs(Math.ceil(remaingingGoldNeededToday/20)));
 			$('.perday .moreSpecialRaidsGold').html(Math.abs(Math.ceil(remaingingGoldNeededToday/99)));
 		}
-		$('.totals .moreHostedExpertRaidsGold').html(Math.abs(Math.ceil((maxGold-goldTotal-goldToday)/30)));
-		$('.totals .moreJoinedExpertRaidsGold').html(Math.abs(Math.ceil((maxGold-goldTotal-goldToday)/20)));
-		$('.totals .moreSpecialRaidsGold').html(Math.abs(Math.ceil((maxGold-goldTotal-goldToday)/99)));
+		$('.totals .moreHostedExpertRaidsGold').html(Math.abs(Math.ceil((maxGold-goldCurrent)/30)));
+		$('.totals .moreJoinedExpertRaidsGold').html(Math.abs(Math.ceil((maxGold-goldCurrent)/20)));
+		$('.totals .moreSpecialRaidsGold').html(Math.abs(Math.ceil((maxGold-goldCurrent)/99)));
 	});
 
 	$('#calculate').click();
