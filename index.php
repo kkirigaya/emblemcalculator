@@ -4,6 +4,7 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script type="text/javascript" src="/emblemcalculator/calc.js"></script>
 	<link rel="stylesheet" type="text/css" href="/emblemcalculator/style.css"></style>
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet"> 
 	<script type="text/javascript">
 	  var _gaq = _gaq || [];
 	  _gaq.push(['_setAccount', 'UA-5541692-2']);
@@ -19,18 +20,20 @@
 <body>
 <?php
 
-echo '<h1>Resplendent Refrain Emblems Calculator</h1>';
+echo '<h1>Resplendent Refrain Emblems Calculator (Updated 12.4.18)</h1>';
 echo '<h2>Ends in <span id="countdown"></span></h2>';
+echo '<button id="info">Usage Instructions</button>';
+echo '<p class="info-text">When you start the day. enter the amount of emblems you have in the first 3 fields. As you progress, use the second 3 fields to enter your current number of emblems and see if you\'re hitting your minimum pace for the day.</p>';
 
-echo'<h3>Enter your total emblems here</h3>';
-echo '<label for="bronzeTotal">Total Bronze</label><input id="bronzeTotal" type="text" value="0" /><br/>';
-echo '<label for="silverTotal">Total Silver</label><input id="silverTotal" type="text" value="0" /><br/>';
-echo '<label for="goldTotal">Total Gold</label><input id="goldTotal" type="text" value="0" /><br/>';
+echo'<h3>Emblems You Started with Today</h3>';
+echo '<label for="bronzeStarting">Bronze</label><input id="bronzeStarting" type="text" value="0" /><br/>';
+echo '<label for="silverStarting">Silver</label><input id="silverStarting" type="text" value="0" /><br/>';
+echo '<label for="goldStarting">Gold</label><input id="goldStarting" type="text" value="0" /><button id="copy-current">Copy to Current</button><br/>';
 
-echo'<h3>Enter your emblems earned today here</h3>';
-echo '<label for="bronzeToday">Bronze</label><input id="bronzeToday" type="text" value="0" /><br/>';
-echo '<label for="silverToday">Silver</label><input id="silverToday" type="text" value="0" /><br/>';
-echo '<label for="goldToday">Gold</label><input id="goldToday" type="text" value="0" /><br/>';
+echo'<h3>Current Emblem Count</h3>';
+echo '<label for="bronzeCurrent">Bronze</label><input id="bronzeCurrent" type="text" value="0" /><br/>';
+echo '<label for="silverCurrent">Silver</label><input id="silverCurrent" type="text" value="0" /><br/>';
+echo '<label for="goldCurrent">Gold</label><input id="goldCurrent" type="text" value="0" /><br/>';
 
 echo '</br><button id="calculate">Calculate</button>';
 
