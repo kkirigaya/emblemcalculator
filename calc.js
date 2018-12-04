@@ -1,7 +1,13 @@
 jQuery(document).ready(function($){
 	//handle show/hide of instructions
 	$('#info').on('click', function(e){
+		$(this).toggleClass('active');
 		$('.info-text').slideToggle();
+	})
+
+	$('#custom-goals').on('click', function(e){
+		$(this).toggleClass('active');
+		$('.custom-goals-wrap').slideToggle();
 	})
 
 	function getTimeRemaining(endtime){
@@ -65,7 +71,10 @@ jQuery(document).ready(function($){
 
 	$('#calculate').on('click', function(e) {
 	 	//bronze numbers
-	 	var maxBronze = 1000;
+	 	if( $('#customBronze').is(':visible') )
+	 		var maxBronze = $('#customBronze').val();
+	 	else
+		 	var maxBronze = 1000;
 	 	var bronzeStarting = parseInt($('#bronzeStarting').val());
 	 	if( isNaN(bronzeStarting) )
 			bronzeStarting = 0;
@@ -97,7 +106,10 @@ jQuery(document).ready(function($){
 		$('.totals .moreJoinedBeginnerRaidsBronze').html(Math.abs(Math.ceil((maxBronze-bronzeCurrent)/16)));
 
 		//silver numbers
-		var maxSilver = 1000;
+		if( $('#customSilver').is(':visible') )
+	 		var maxSilver = $('#customSilver').val();
+	 	else
+		 	var maxSilver = 1000;
 	 	var silverStarting =  parseInt($('#silverStarting').val());
 	 	if( isNaN(silverStarting) )
 			silverStarting = 0;
@@ -126,7 +138,10 @@ jQuery(document).ready(function($){
 		$('.totals .moreJoinedStandardRaidsSilver').html(Math.abs(Math.ceil((maxSilver-silverCurrent)/13)));
 
 		//gold numbers
-		var maxGold = 4500;
+		if( $('#customGold').is(':visible') )
+	 		var maxGold = $('#customGold').val();
+	 	else
+		 	var maxGold = 4500;
 	 	var goldStarting = parseInt($('#goldStarting').val());
 	 	if( isNaN(goldStarting) )
 			goldStarting = 0;
